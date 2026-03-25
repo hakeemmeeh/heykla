@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafbfc;
+  --foreground: #0c1117;
+  --muted: #5c6670;
+  --accent: #059669;
+  --accent-hover: #047857;
+  --accent-foreground: #ecfdf5;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --ring: #059669;
+  --grid: rgba(12, 17, 23, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #07090d;
+    --foreground: #e8eaed;
+    --muted: #9aa4af;
+    --accent: #34d399;
+    --accent-hover: #6ee7b7;
+    --accent-foreground: #022c22;
+    --surface: #0c1117;
+    --border: #1f2937;
+    --ring: #34d399;
+    --grid: rgba(232, 234, 237, 0.04);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
