@@ -1,290 +1,213 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { heykal } from "@/lib/heykal";
 import { getDeviceMemoryGb, motionTokens, shouldReduceHeavyMotion } from "@/lib/motion";
 
-/* ── Video clips: dark cinematic security footage (Obsidian Ember style) ── */
-const CLIPS = [
+/* ── Hero image panels matching Theme 4 (Obsidian Ember) ── */
+const PANELS = [
   {
-    src: "https://videos.pexels.com/video-files/5380642/5380642-sd_640_360_24fps.mp4",
-    poster:
-      "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=1920&q=80&auto=format&fit=crop",
-    alt: "Security personnel on night watch",
+    src: "https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=480",
+    alt: "CCTV surveillance cameras",
   },
   {
-    src: "https://videos.pexels.com/video-files/7534235/7534235-sd_640_360_25fps.mp4",
-    poster:
-      "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=1920&q=80&auto=format&fit=crop",
-    alt: "CCTV surveillance monitoring",
+    src: "https://images.pexels.com/photos/2102416/pexels-photo-2102416.jpeg?auto=compress&cs=tinysrgb&w=480",
+    alt: "Security guard on night duty",
   },
   {
-    src: "https://videos.pexels.com/video-files/5240508/5240508-sd_640_360_30fps.mp4",
-    poster:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80&auto=format&fit=crop",
-    alt: "Corporate building at dusk",
+    src: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=480",
+    alt: "Luxury interior under protection",
   },
   {
-    src: "https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_30fps.mp4",
-    poster:
-      "https://images.unsplash.com/photo-1558002038-1055907df827?w=1920&q=80&auto=format&fit=crop",
-    alt: "Command center operations",
+    src: "https://images.pexels.com/photos/5473956/pexels-photo-5473956.jpeg?auto=compress&cs=tinysrgb&w=480",
+    alt: "Security guard patrolling",
+  },
+  {
+    src: "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=480",
+    alt: "Security control room monitors",
   },
 ] as const;
-
-const CLIP_DURATION = 7000; // ms per clip
-const FADE_DURATION = 1.2; // seconds for crossfade
 
 export function HeroHome() {
   const containerRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const memoryGb = getDeviceMemoryGb();
-  const [scanDone, setScanDone] = useState(false);
-  const [activeClip, setActiveClip] = useState(0);
   const reduceHeavyMotion = shouldReduceHeavyMotion(!!reduce, memoryGb);
-
-  /* ── Command scan intro timer ── */
-  useEffect(() => {
-    if (reduceHeavyMotion) {
-      const immediate = window.setTimeout(() => setScanDone(true), 0);
-      return () => window.clearTimeout(immediate);
-    }
-    const t = window.setTimeout(
-      () => setScanDone(true),
-      Math.round(motionTokens.duration.commandScan * 1000),
-    );
-    return () => window.clearTimeout(t);
-  }, [reduceHeavyMotion]);
-
-  /* ── Auto-advance clips ── */
-  useEffect(() => {
-    if (!scanDone) return;
-    const interval = window.setInterval(() => {
-      setActiveClip((prev) => (prev + 1) % CLIPS.length);
-    }, CLIP_DURATION);
-    return () => window.clearInterval(interval);
-  }, [scanDone]);
 
   /* ── Parallax on scroll ── */
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], reduceHeavyMotion ? [0, 0] : [0, 56]);
-  const scale = useTransform(scrollYProgress, [0, 1], reduceHeavyMotion ? [1, 1] : [1, 1.02]);
+  const y = useTransform(scrollYProgress, [0, 1], reduceHeavyMotion ? [0, 0] : [0, 40]);
   const opacity = useTransform(scrollYProgress, [0, 0.65], [1, 0.35]);
 
-  /* ── Video ref callback for autoplay ── */
-  const handleVideoRef = useCallback((el: HTMLVideoElement | null) => {
-    if (el) {
-      el.play().catch(() => {
-        /* autoplay blocked — poster image shows as fallback */
-      });
-    }
-  }, []);
-
   return (
-    <section ref={containerRef} className="relative min-h-[92vh] overflow-hidden" aria-labelledby="hero-title">
-      {/* ── Video background layer ── */}
-      <motion.div style={{ y, scale }} className="absolute inset-0 will-change-transform">
-        {/* Fallback poster image (loads instantly) */}
+    <section
+      ref={containerRef}
+      className="relative min-h-[92vh] overflow-hidden bg-[#0C0A09]"
+      aria-labelledby="hero-title"
+    >
+      {/* ── Dark cinematic background ── */}
+      <div className="absolute inset-0">
+        {/* Warm amber radial glow — top */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${CLIPS[0].poster})` }}
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(212,116,10,0.15),transparent_55%)]"
           aria-hidden
         />
+        {/* Copper glow — bottom right */}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(232,146,45,0.10),transparent_50%)]"
+          aria-hidden
+        />
+        {/* Subtle vignette */}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(0,0,0,0.5))]"
+          aria-hidden
+        />
+        {/* Fortress grid (very subtle) */}
+        <div className="absolute inset-0 grid-fortress opacity-30 mix-blend-soft-light" aria-hidden />
+        {/* Film grain */}
+        <div className="texture-film absolute inset-0 opacity-20" aria-hidden />
 
-        {/* Crossfading video clips */}
-        <AnimatePresence>
+        {/* Ember particles */}
+        <div className="absolute inset-0 overflow-hidden" aria-hidden>
           <motion.div
-            key={activeClip}
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: FADE_DURATION, ease: "easeInOut" }}
-          >
-            <video
-              ref={handleVideoRef}
-              src={CLIPS[activeClip].src}
-              poster={CLIPS[activeClip].poster}
-              muted
-              playsInline
-              autoPlay
-              loop={false}
-              preload="auto"
-              className="h-full w-full object-cover"
-              aria-hidden
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Overlays */}
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-black/68 via-[#1C1C1C]/72 to-[#1C1C1C]"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(212,116,10,0.12),transparent_52%)]"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(232,146,45,0.08),transparent_45%)]"
-          aria-hidden
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.25),rgba(0,0,0,0.6))]" aria-hidden />
-        <div className="absolute inset-0 grid-fortress opacity-80 mix-blend-soft-light" aria-hidden />
-        <div className="texture-film absolute inset-0 opacity-25" aria-hidden />
-      </motion.div>
-
-      {/* ── Command scan intro ── */}
-      {!scanDone ? (
-        <motion.div
-          className="absolute inset-0 z-[2] flex items-center justify-center bg-[#1C1C1C]/85 backdrop-blur-[2px]"
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          aria-hidden
-        >
-          <div className="w-full max-w-xl px-6 sm:px-8">
-            <div className="mb-5 flex items-center justify-between">
-              <p className="font-tactical text-xs font-semibold uppercase tracking-[0.35em] text-khaki">
-                Command scan
-              </p>
-              <p className="font-tactical text-xs uppercase tracking-[0.25em] text-muted">Phase 01</p>
-            </div>
-            <div className="h-1 overflow-hidden bg-[#1C1C1C]/40">
-              <motion.div
-                className="h-full bg-gold"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                style={{ transformOrigin: "left" }}
-                transition={{
-                  duration: motionTokens.duration.commandScan,
-                  ease: motionTokens.easing.standard,
-                }}
-              />
-            </div>
-          </div>
-        </motion.div>
-      ) : null}
+            className="absolute top-12 left-[15%] h-1 w-1 rounded-full bg-amber/60"
+            animate={{ y: [0, -80, -160], opacity: [0, 0.8, 0], x: [0, 10, 20] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 0, ease: "easeOut" }}
+          />
+          <motion.div
+            className="absolute top-20 right-[25%] h-0.5 w-0.5 rounded-full bg-copper/50"
+            animate={{ y: [0, -60, -120], opacity: [0, 0.6, 0], x: [0, -8, -16] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: 1.2, ease: "easeOut" }}
+          />
+          <motion.div
+            className="absolute top-8 right-[40%] h-1 w-1 rounded-full bg-amber/40"
+            animate={{ y: [0, -100, -200], opacity: [0, 0.5, 0], x: [0, 15, 30] }}
+            transition={{ duration: 5, repeat: Infinity, delay: 2.5, ease: "easeOut" }}
+          />
+          <motion.div
+            className="absolute top-16 left-[60%] h-0.5 w-0.5 rounded-full bg-copper/60"
+            animate={{ y: [0, -70, -140], opacity: [0, 0.7, 0], x: [0, -5, -10] }}
+            transition={{ duration: 3, repeat: Infinity, delay: 0.8, ease: "easeOut" }}
+          />
+        </div>
+      </div>
 
       {/* ── Hero content ── */}
       <motion.div
-        className="relative z-[1] mx-auto grid min-h-[92vh] max-w-6xl items-end gap-8 px-4 pb-20 pt-32 sm:px-6 sm:pb-28 sm:pt-36 lg:grid-cols-[1fr_360px]"
+        className="relative z-[1] mx-auto grid min-h-[92vh] max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]"
         style={{ opacity }}
         initial={{ opacity: 0, y: reduceHeavyMotion ? 0 : 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: motionTokens.duration.hero, ease: motionTokens.easing.standard }}
       >
-        <div>
-        <div className="inline-flex w-fit flex-wrap items-center gap-4 rounded-sm border border-gold/30 bg-[#1C1C1C]/55 px-3 py-2 backdrop-blur-sm">
-          <span className="rank-stripes" aria-hidden />
-          <p className="font-tactical text-xs font-semibold uppercase tracking-[0.32em] text-gold [text-shadow:0_1px_8px_rgba(0,0,0,0.65)]">
-            Elite physical security & surveillance
+        {/* Left — Text content */}
+        <motion.div style={{ y }}>
+          <div className="inline-flex w-fit flex-wrap items-center gap-4 rounded-sm border border-amber/25 bg-white/5 px-3 py-2 backdrop-blur-sm">
+            <span className="rank-stripes" aria-hidden />
+            <p className="font-tactical text-xs font-semibold uppercase tracking-[0.32em] text-amber [text-shadow:0_1px_8px_rgba(0,0,0,0.65)]">
+              Elite physical security & surveillance
+            </p>
+          </div>
+          <h1
+            id="hero-title"
+            className="mt-6 max-w-xl font-premium text-5xl font-extrabold leading-[1.05] tracking-[-0.01em] text-white [text-shadow:0_4px_22px_rgba(0,0,0,0.6)] sm:text-6xl md:text-7xl"
+          >
+            HEYKAL SECURITY
+          </h1>
+          <p className="mt-3 max-w-xl font-premium text-3xl font-bold italic leading-tight sm:text-4xl">
+            <span className="bg-gradient-to-r from-amber via-copper to-gold bg-clip-text text-transparent">
+              Your Fortress. Our Mission.
+            </span>
           </p>
-        </div>
-        <h1
-          id="hero-title"
-          className="mt-5 max-w-4xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.015em] text-white [text-shadow:0_4px_22px_rgba(0,0,0,0.6)] sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          Your Fortress.
-          <span className="font-premium block bg-gradient-to-r from-amber via-copper to-gold bg-clip-text text-transparent">
-            Our Mission.
-          </span>
-        </h1>
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 [text-shadow:0_1px_10px_rgba(0,0,0,0.55)] sm:text-lg">
-          From manned guarding to executive protection, {heykal.name} secures people, property, and
-          operations with disciplined command and 24/7 readiness.
-        </p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <motion.div
-            initial={{ opacity: 0, y: reduceHeavyMotion ? 0 : 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: motionTokens.duration.base, delay: 0.08, ease: motionTokens.easing.standard }}
-          >
-            <Link
-            href="/contact"
-            className="clip-tactical inline-flex h-12 items-center justify-center bg-gold px-7 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover"
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/75 [text-shadow:0_1px_10px_rgba(0,0,0,0.55)] sm:text-lg">
+            {heykal.name} delivers bespoke protection for discerning clientele.
+            Secure your assets with unmatched expertise, advanced technology,
+            and unwavering dedication.
+          </p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <motion.div
+              initial={{ opacity: 0, y: reduceHeavyMotion ? 0 : 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionTokens.duration.base, delay: 0.08, ease: motionTokens.easing.standard }}
             >
-              Request a consultation
-            </Link>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: reduceHeavyMotion ? 0 : 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: motionTokens.duration.base, delay: 0.14, ease: motionTokens.easing.standard }}
-          >
-            <Link
-            href="/services"
-            className="clip-tactical inline-flex h-12 items-center justify-center border border-white/30 bg-white/15 px-7 text-sm font-semibold text-white transition-colors hover:border-gold/60 hover:bg-white/25"
+              <Link
+                href="/contact"
+                className="clip-tactical inline-flex h-12 items-center justify-center gradient-ember px-7 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              >
+                Request a Consultation
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: reduceHeavyMotion ? 0 : 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionTokens.duration.base, delay: 0.14, ease: motionTokens.easing.standard }}
             >
-              Explore services
-            </Link>
-          </motion.div>
-        </div>
-        <div className="mt-14 flex flex-wrap items-center gap-6 pt-8 font-tactical text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">
-          <span className="text-khaki/90">Licensed & insured</span>
-          <span className="hidden text-white/40 sm:inline" aria-hidden>
-            |
-          </span>
-          <span>Vetted operators</span>
-          <span className="text-gold">24/7 command desk</span>
-        </div>
-        </div>
+              <Link
+                href="/services"
+                className="clip-tactical inline-flex h-12 items-center justify-center border border-amber/30 bg-white/5 px-7 text-sm font-semibold text-white transition-colors hover:border-amber/60 hover:bg-white/10"
+              >
+                Explore Services
+              </Link>
+            </motion.div>
+          </div>
+        </motion.div>
 
-        {/* ── Image collage (Obsidian Ember style) ── */}
-        <motion.aside
-          className="relative hidden gap-2 lg:grid lg:grid-cols-2 lg:grid-rows-2"
-          style={{ width: 340, height: 340 }}
-          initial={{ opacity: 0, x: reduceHeavyMotion ? 0 : 16 }}
+        {/* Right — Image panels (Theme 4 asymmetric collage) */}
+        <motion.div
+          className="hidden lg:block"
+          initial={{ opacity: 0, x: reduceHeavyMotion ? 0 : 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: motionTokens.duration.base, delay: 0.18, ease: motionTokens.easing.standard }}
-          aria-label="Security operations gallery"
+          transition={{ duration: motionTokens.duration.base, delay: 0.22, ease: motionTokens.easing.standard }}
         >
-          {/* CCTV surveillance monitors */}
-          <div className="relative overflow-hidden rounded-sm border border-amber/20">
-            <img
-              src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=400&q=80&auto=format&fit=crop"
-              alt="CCTV surveillance monitors"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          {/* Top row — 2 images */}
+          <div className="grid grid-cols-2 gap-2.5">
+            {PANELS.slice(0, 2).map((panel, i) => (
+              <div
+                key={i}
+                className="relative aspect-[4/3] overflow-hidden rounded-sm border border-amber/15"
+              >
+                <img
+                  src={panel.src}
+                  alt={panel.alt}
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  loading="eager"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-amber/[0.06] mix-blend-overlay" />
+              </div>
+            ))}
           </div>
-          {/* Security guard on night post */}
-          <div className="relative overflow-hidden rounded-sm border border-amber/20">
-            <img
-              src="https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&q=80&auto=format&fit=crop"
-              alt="Security personnel on post"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          {/* Bottom row — 3 images */}
+          <div className="mt-2.5 grid grid-cols-3 gap-2.5">
+            {PANELS.slice(2, 5).map((panel, i) => (
+              <div
+                key={i}
+                className="relative aspect-[4/3] overflow-hidden rounded-sm border border-amber/15"
+              >
+                <img
+                  src={panel.src}
+                  alt={panel.alt}
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-amber/[0.06] mix-blend-overlay" />
+              </div>
+            ))}
           </div>
-          {/* Luxury interior under protection */}
-          <div className="relative overflow-hidden rounded-sm border border-amber/20">
-            <img
-              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80&auto=format&fit=crop"
-              alt="Luxury interior under protection"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          </div>
-          {/* Guard patrolling dark corridor */}
-          <div className="relative overflow-hidden rounded-sm border border-amber/20">
-            <img
-              src="https://images.unsplash.com/photo-1558002038-1055907df827?w=400&q=80&auto=format&fit=crop"
-              alt="Security command center"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          </div>
-
-          {/* Warm ember glow overlay on whole collage */}
-          <div className="pointer-events-none absolute -inset-1 rounded-sm bg-[radial-gradient(ellipse_at_center,_rgba(212,116,10,0.08),transparent_70%)]" aria-hidden />
-        </motion.aside>
+        </motion.div>
       </motion.div>
+
+      {/* ── Bottom fade to main bg ── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent"
+        aria-hidden
+      />
     </section>
   );
 }
