@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafbfc;
-  --foreground: #0c1117;
-  --muted: #5c6670;
-  --accent: #059669;
-  --accent-hover: #047857;
-  --accent-foreground: #ecfdf5;
-  --surface: #ffffff;
-  --border: #e5e7eb;
-  --ring: #059669;
-  --grid: rgba(12, 17, 23, 0.04);
-}
+  /* ─── Ivory & Onyx — Luxury Editorial ─── */
+  --navy: #1C1C1C;
+  --matte: #F0ECE4;
+  --gold: #B8952F;
+  --gold-dim: #9A7D2A;
+  --silver: #4A4A4A;
+  --olive: #D6CFC0;
+  --olive-muted: #C4BBA8;
+  --khaki: #8B7D3C;
+  --background: #FAFAF5;
+  --foreground: #1A1A1A;
+  --muted: #6B6560;
+  --accent: var(--gold);
+  --accent-hover: #D4AF37;
+  --accent-foreground: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-elevated: #F5F2EB;
+  --border: #E8E3DA;
+  --ring: var(--gold);
+  --grid: rgba(184, 149, 47, 0.06);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #07090d;
-    --foreground: #e8eaed;
-    --muted: #9aa4af;
-    --accent: #34d399;
-    --accent-hover: #6ee7b7;
-    --accent-foreground: #022c22;
-    --surface: #0c1117;
-    --border: #1f2937;
-    --ring: #34d399;
-    --grid: rgba(232, 234, 237, 0.04);
-  }
+  /* ─── Obsidian Ember — warm amber/copper accents ─── */
+  --amber: #D4740A;
+  --copper: #E8922D;
+  --ember: #C85A07;
 }
 
 @theme inline {
@@ -36,26 +36,36 @@
   --color-accent-hover: var(--accent-hover);
   --color-accent-foreground: var(--accent-foreground);
   --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-matte: var(--matte);
+  --color-gold: var(--gold);
+  --color-silver: var(--silver);
+  --color-olive: var(--olive);
+  --color-olive-muted: var(--olive-muted);
+  --color-khaki: var(--khaki);
+  --color-amber: var(--amber);
+  --color-copper: var(--copper);
+  --color-ember: var(--ember);
+  --font-sans: var(--font-body), system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  html {
+    scroll-behavior: auto;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 :focus-visible {
@@ -63,9 +73,167 @@ body {
   outline-offset: 2px;
 }
 
-.grid-overlay {
+.font-display {
+  font-family: var(--font-display), var(--font-sans);
+}
+
+/* Military / tactical label style — use with Rajdhani */
+.font-tactical {
+  font-family: var(--font-tactical), var(--font-sans);
+}
+
+.font-premium {
+  font-family: var(--font-premium), serif;
+}
+
+/* Rank chevron strip (decorative) */
+.rank-stripes {
+  width: 3.5rem;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--olive-muted) 0%,
+    var(--olive-muted) 28%,
+    var(--gold) 28%,
+    var(--gold) 52%,
+    var(--olive) 52%,
+    var(--olive) 100%
+  );
+}
+
+/* Chamfered "plate" buttons — subtle tactical geometry */
+.clip-tactical {
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+.grid-fortress {
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-size: 64px 64px;
+}
+
+/* editorial gold hairline */
+.hairline-gold {
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  height: 1px;
+  opacity: 0.55;
+}
+
+/* ─── Ember gradient utilities ─── */
+.gradient-ember {
+  background: linear-gradient(135deg, var(--amber), var(--copper), var(--gold));
+}
+
+.gradient-ember-text {
+  background: linear-gradient(135deg, var(--amber), var(--copper), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-ember-text-wide {
+  background: linear-gradient(90deg, var(--amber) 0%, var(--copper) 45%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ember hairline */
+.hairline-ember {
+  background: linear-gradient(90deg, transparent, var(--amber), var(--copper), transparent);
+  height: 1px;
+  opacity: 0.55;
+}
+
+/* shield motif corner (subtle) */
+.shield-frame {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), 50% 100%, 0 calc(100% - 24px));
+}
+
+@keyframes scanSweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.scan-loop {
+  background:
+    conic-gradient(from 0deg, rgba(184, 149, 47, 0.18), transparent 20%, transparent 75%, rgba(214, 207, 192, 0.15)),
+    radial-gradient(circle at center, rgba(214, 207, 192, 0.08), transparent 62%);
+  animation: scanSweep 8s linear infinite;
+}
+
+.scanlines {
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(184, 149, 47, 0.05) 0px,
+    rgba(184, 149, 47, 0.05) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+
+.cgi-noise {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(0, 0, 0, 0.04) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 40%, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 75%, rgba(0, 0, 0, 0.04) 0 1px, transparent 1px);
+  background-size: 40px 40px, 56px 56px, 72px 72px;
+}
+
+.texture-film {
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(0, 0, 0, 0.04) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 35%, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px),
+    radial-gradient(circle at 35% 80%, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px);
+  background-size: 3px 3px, 4px 4px, 5px 5px;
+  mix-blend-mode: multiply;
+}
+
+.section-fade {
+  position: relative;
+  --section-fade-alpha: 0.12;
+  --section-fade-size: 48px;
+}
+
+.section-fade::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: var(--section-fade-size);
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(250, 250, 245, var(--section-fade-alpha)), transparent);
+}
+
+.section-fade::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: var(--section-fade-size);
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(250, 250, 245, var(--section-fade-alpha)), transparent);
+}
+
+.section-fade-soft {
+  --section-fade-alpha: 0.08;
+  --section-fade-size: 40px;
+}
+
+.section-fade-strong {
+  --section-fade-alpha: 0.18;
+  --section-fade-size: 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-loop {
+    animation: none;
+  }
 }

@@ -1,21 +1,26 @@
-import { Header } from "@/components/site/Header";
-import { Hero } from "@/components/site/Hero";
-import { Services } from "@/components/site/Services";
-import { Process } from "@/components/site/Process";
-import { ContactCta } from "@/components/site/ContactCta";
-import { Footer } from "@/components/site/Footer";
+import { AppShell } from "@/components/heykal/AppShell";
+import { CtaBand } from "@/components/heykal/CtaBand";
+import { ControlRoomContinuity } from "@/components/heykal/ControlRoomContinuity";
+import { HeroHome } from "@/components/heykal/HeroHome";
+import { HomeIndustriesTeaser } from "@/components/heykal/HomeIndustriesTeaser";
+import { HomeServicesPreview } from "@/components/heykal/HomeServicesPreview";
+import { InteractiveCommandScene } from "@/components/heykal/InteractiveCommandScene";
+import { Testimonials } from "@/components/heykal/Testimonials";
+import { TrustStrip } from "@/components/heykal/TrustStrip";
+import { WhyHeykal } from "@/components/heykal/WhyHeykal";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <>
-      <Header />
-      <main id="main" className="flex-1">
-        <Hero />
-        <Services />
-        <Process />
-        <ContactCta />
-      </main>
-      <Footer />
-    </>
+    <AppShell>
+      <HeroHome />
+      <div className="section-fade section-fade-strong"><TrustStrip /></div>
+      <div className="section-fade section-fade-soft"><HomeServicesPreview /></div>
+      <div className="section-fade section-fade-strong"><InteractiveCommandScene /></div>
+      <div className="section-fade section-fade-soft"><WhyHeykal /></div>
+      <div className="section-fade section-fade-strong"><ControlRoomContinuity /></div>
+      <div className="section-fade section-fade-soft"><Testimonials /></div>
+      <div className="section-fade section-fade-soft"><HomeIndustriesTeaser /></div>
+      <div className="section-fade section-fade-strong"><CtaBand /></div>
+    </AppShell>
   );
 }
