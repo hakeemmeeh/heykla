@@ -1,7 +1,7 @@
 "use client";
 
 import { contactSchema } from "@/lib/contact-schema";
-import { heykal } from "@/lib/heykal";
+import { haikal } from "@/lib/haikal";
 import { useState } from "react";
 
 type FieldErrors = Partial<
@@ -71,12 +71,12 @@ export function QuoteForm() {
   }
 
   return (
-    <form className="grid gap-5" onSubmit={onSubmit} noValidate>
+    <form className="grid gap-8" onSubmit={onSubmit} noValidate>
       <input type="text" name="_company_url" tabIndex={-1} autoComplete="off" className="sr-only" aria-hidden />
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-8 sm:grid-cols-2">
         <div>
-          <label htmlFor="q-name" className="text-sm font-medium text-foreground">
+          <label htmlFor="q-name" className="text-[10px] font-bold uppercase tracking-widest text-purple/60">
             Full name
           </label>
           <input
@@ -85,16 +85,16 @@ export function QuoteForm() {
             type="text"
             autoComplete="name"
             required
-            className="mt-1.5 w-full rounded-sm border border-border bg-surface px-3 py-2.5 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="mt-3 w-full border border-purple/10 bg-white px-5 py-4 text-sm font-medium text-purple outline-none focus:border-rose focus:ring-1 focus:ring-rose"
           />
           {fieldErrors.name ? (
-            <p className="mt-1 text-xs text-red-400" role="alert">
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-500" role="alert">
               {fieldErrors.name}
             </p>
           ) : null}
         </div>
         <div>
-          <label htmlFor="q-email" className="text-sm font-medium text-foreground">
+          <label htmlFor="q-email" className="text-[10px] font-bold uppercase tracking-widest text-purple/60">
             Work email
           </label>
           <input
@@ -103,19 +103,19 @@ export function QuoteForm() {
             type="email"
             autoComplete="email"
             required
-            className="mt-1.5 w-full rounded-sm border border-border bg-surface px-3 py-2.5 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="mt-3 w-full border border-purple/10 bg-white px-5 py-4 text-sm font-medium text-purple outline-none focus:border-rose focus:ring-1 focus:ring-rose"
           />
           {fieldErrors.email ? (
-            <p className="mt-1 text-xs text-red-400" role="alert">
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-500" role="alert">
               {fieldErrors.email}
             </p>
           ) : null}
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-8 sm:grid-cols-2">
         <div>
-          <label htmlFor="q-phone" className="text-sm font-medium text-foreground">
+          <label htmlFor="q-phone" className="text-[10px] font-bold uppercase tracking-widest text-purple/60">
             Phone
           </label>
           <input
@@ -123,16 +123,16 @@ export function QuoteForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
-            className="mt-1.5 w-full rounded-sm border border-border bg-surface px-3 py-2.5 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="mt-3 w-full border border-purple/10 bg-white px-5 py-4 text-sm font-medium text-purple outline-none focus:border-rose focus:ring-1 focus:ring-rose"
           />
           {fieldErrors.phone ? (
-            <p className="mt-1 text-xs text-red-400" role="alert">
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-500" role="alert">
               {fieldErrors.phone}
             </p>
           ) : null}
         </div>
         <div>
-          <label htmlFor="q-company" className="text-sm font-medium text-foreground">
+          <label htmlFor="q-company" className="text-[10px] font-bold uppercase tracking-widest text-purple/60">
             Organization
           </label>
           <input
@@ -140,10 +140,10 @@ export function QuoteForm() {
             name="company"
             type="text"
             autoComplete="organization"
-            className="mt-1.5 w-full rounded-sm border border-border bg-surface px-3 py-2.5 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="mt-3 w-full border border-purple/10 bg-white px-5 py-4 text-sm font-medium text-purple outline-none focus:border-rose focus:ring-1 focus:ring-rose"
           />
           {fieldErrors.company ? (
-            <p className="mt-1 text-xs text-red-400" role="alert">
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-500" role="alert">
               {fieldErrors.company}
             </p>
           ) : null}
@@ -151,20 +151,20 @@ export function QuoteForm() {
       </div>
 
       <div>
-        <label htmlFor="q-service" className="text-sm font-medium text-foreground">
+        <label htmlFor="q-service" className="text-[10px] font-bold uppercase tracking-widest text-purple/60">
           Primary interest
         </label>
         <select
           id="q-service"
           name="serviceInterest"
           required
-          className="mt-1.5 w-full rounded-sm border border-border bg-surface px-3 py-2.5 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-3 w-full border border-purple/10 bg-white px-5 py-4 text-sm font-medium text-purple outline-none focus:border-rose focus:ring-1 focus:ring-rose appearance-none"
           defaultValue=""
         >
           <option value="" disabled>
             Select a service
           </option>
-          {heykal.services.map((s) => (
+          {haikal.services.map((s) => (
             <option key={s.slug} value={s.title}>
               {s.title}
             </option>
@@ -172,14 +172,14 @@ export function QuoteForm() {
           <option value="Other / multiple">Other / multiple</option>
         </select>
         {fieldErrors.serviceInterest ? (
-          <p className="mt-1 text-xs text-red-400" role="alert">
+          <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-500" role="alert">
             {fieldErrors.serviceInterest}
           </p>
         ) : null}
       </div>
 
       <div>
-        <label htmlFor="q-message" className="text-sm font-medium text-foreground">
+        <label htmlFor="q-message" className="text-[10px] font-bold uppercase tracking-widest text-purple/60">
           How can we help?
         </label>
         <textarea
@@ -188,34 +188,37 @@ export function QuoteForm() {
           rows={5}
           required
           placeholder="Sites, timelines, threat context—share what you can."
-          className="mt-1.5 w-full resize-y rounded-sm border border-border bg-surface px-3 py-2.5 text-sm text-foreground outline-none placeholder:text-muted focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-3 w-full resize-y border border-purple/10 bg-white px-5 py-4 text-sm font-medium text-purple outline-none placeholder:text-purple/30 focus:border-rose focus:ring-1 focus:ring-rose"
         />
         {fieldErrors.message ? (
-          <p className="mt-1 text-xs text-red-400" role="alert">
+          <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-500" role="alert">
             {fieldErrors.message}
           </p>
         ) : null}
       </div>
 
       {formError ? (
-        <p className="text-sm text-red-400" role="alert">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-red-500" role="alert">
           {formError}
         </p>
       ) : null}
 
       {status === "success" ? (
-        <p className="text-sm font-medium text-gold" role="status">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-rose" role="status">
           Thank you. Our desk will contact you shortly.
         </p>
       ) : null}
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="clip-tactical inline-flex h-12 items-center justify-center bg-gold px-6 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {status === "loading" ? "Sending…" : "Submit request"}
-      </button>
+      <div className="pt-4">
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="group relative inline-flex h-16 items-center justify-center bg-purple px-10 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-purple/90 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          <span>{status === "loading" ? "Transmitting…" : "Transmit request"}</span>
+          <div className="absolute inset-0 border border-rose/30 group-hover:border-rose/60" />
+        </button>
+      </div>
     </form>
   );
 }

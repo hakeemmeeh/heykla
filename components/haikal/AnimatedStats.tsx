@@ -19,26 +19,21 @@ function StatItem({
   const spring = useSpring(0, { stiffness: 90, damping: 26 });
   const [display, setDisplay] = useState(0);
 
-  useMotionValueEvent(spring, "change", (v) => {
-    setDisplay(Math.round(v));
-  });
-
   useEffect(() => {
-    if (!inView) return;
-    if (reduceMotion) {
-      spring.set(value);
-      return;
-    }
-    spring.set(value);
-  }, [inView, reduceMotion, spring, value]);
+    if (inView) spring.set(value);
+  }, [inView, spring, value]);
+
+  useMotionValueEvent(spring, "change", (v) => setDisplay(Math.round(v)));
 
   return (
-    <div ref={ref} className="border-l-2 border-gold/30 pl-6">
-      <p className="font-display text-4xl font-bold tabular-nums text-foreground sm:text-5xl">
-        {display}
-        {suffix}
+    <div ref={ref} className="group relative pt-12">
+      <div className="absolute top-0 left-0 h-px w-12 bg-white/10 group-hover:w-full group-hover:bg-rose transition-all duration-700" />
+      <span className="font-display text-6xl font-black tabular-nums text-white lg:text-7xl">
+        {display}<span className="text-rose opacity-40">{suffix}</span>
+      </span>
+      <p className="mt-4 font-tactical text-[10px] font-black uppercase tracking-[0.4em] text-rose/60">
+        {label}
       </p>
-      <p className="mt-2 text-sm text-muted">{label}</p>
     </div>
   );
 }
@@ -50,7 +45,7 @@ export function AnimatedStats({
 }) {
   const reduce = useReducedMotion();
   return (
-    <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
       {stats.map((s) => (
         <StatItem key={s.label} {...s} reduceMotion={!!reduce} />
       ))}

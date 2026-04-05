@@ -1,4 +1,4 @@
-# Heykal Security
+# Haikal Security
 
 Elite physical security & surveillance — corporate website built with Next.js 16, Tailwind CSS, and Framer Motion.
 

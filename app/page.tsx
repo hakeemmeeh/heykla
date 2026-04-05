@@ -1,13 +1,13 @@
-import { AppShell } from "@/components/heykal/AppShell";
-import { CtaBand } from "@/components/heykal/CtaBand";
-import { ControlRoomContinuity } from "@/components/heykal/ControlRoomContinuity";
-import { HeroHome } from "@/components/heykal/HeroHome";
-import { HomeIndustriesTeaser } from "@/components/heykal/HomeIndustriesTeaser";
-import { HomeServicesPreview } from "@/components/heykal/HomeServicesPreview";
-import { InteractiveCommandScene } from "@/components/heykal/InteractiveCommandScene";
-import { Testimonials } from "@/components/heykal/Testimonials";
-import { TrustStrip } from "@/components/heykal/TrustStrip";
-import { WhyHeykal } from "@/components/heykal/WhyHeykal";
+import { AppShell } from "@/components/haikal/AppShell";
+import { CtaBand } from "@/components/haikal/CtaBand";
+import { ControlRoomContinuity } from "@/components/haikal/ControlRoomContinuity";
+import { HeroHome } from "@/components/haikal/HeroHome";
+import { HomeIndustriesTeaser } from "@/components/haikal/HomeIndustriesTeaser";
+import { HomeServicesPreview } from "@/components/haikal/HomeServicesPreview";
+import { InteractiveCommandScene } from "@/components/haikal/InteractiveCommandScene";
+import { Testimonials } from "@/components/haikal/Testimonials";
+import { TrustStrip } from "@/components/haikal/TrustStrip";
+import { WhyHaikal } from "@/components/haikal/WhyHaikal";
 
 export default function HomePage() {
   return (
@@ -16,7 +16,7 @@ export default function HomePage() {
       <div className="section-fade section-fade-strong"><TrustStrip /></div>
       <div className="section-fade section-fade-soft"><HomeServicesPreview /></div>
       <div className="section-fade section-fade-strong"><InteractiveCommandScene /></div>
-      <div className="section-fade section-fade-soft"><WhyHeykal /></div>
+      <div className="section-fade section-fade-soft"><WhyHaikal /></div>
       <div className="section-fade section-fade-strong"><ControlRoomContinuity /></div>
       <div className="section-fade section-fade-soft"><Testimonials /></div>
       <div className="section-fade section-fade-soft"><HomeIndustriesTeaser /></div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { AppShell } from "@/components/heykal/AppShell";
-import { IndustriesRevealGrid } from "@/components/heykal/IndustriesRevealGrid";
+import { AppShell } from "@/components/haikal/AppShell";
+import { IndustriesRevealGrid } from "@/components/haikal/IndustriesRevealGrid";
 
 export const metadata: Metadata = {
   title: "Industries",
@@ -11,13 +11,14 @@ export const metadata: Metadata = {
 export default function IndustriesPage() {
   return (
     <AppShell>
-      <section className="bg-surface-elevated py-20 sm:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <p className="font-tactical text-xs font-semibold uppercase tracking-[0.3em] text-khaki">Industries</p>
-          <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            Programs tuned to how your world actually moves.
+      <section className="relative bg-purple py-24 sm:py-32">
+        <div className="pointer-events-none absolute inset-0 grid-fortress opacity-[0.15]" aria-hidden />
+        <div className="mx-auto max-w-7xl px-6">
+          <p className="font-tactical text-[10px] font-bold uppercase tracking-[0.4em] text-rose">Industries</p>
+          <h1 className="mt-8 max-w-5xl font-premium text-4xl font-black uppercase tracking-tight text-white sm:text-6xl italic">
+            Mission-ready programs.
           </h1>
-          <p className="mt-5 max-w-2xl text-muted leading-relaxed">
+          <p className="mt-8 max-w-3xl text-xl leading-relaxed text-ivory/70">
             We align staffing models, technology, and legal requirements to each environment—so officers show up
             useful on day one.
           </p>

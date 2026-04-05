@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Outfit, Playfair_Display, Rajdhani } from "next/font/google";
-import { PageLoader } from "@/components/heykal/PageLoader";
-import { SmoothScroll } from "@/components/heykal/SmoothScroll";
-import { heykal } from "@/lib/heykal";
+import { PageLoader } from "@/components/haikal/PageLoader";
+import { SmoothScroll } from "@/components/haikal/SmoothScroll";
+import { haikal } from "@/lib/haikal";
 import "./globals.css";
 
 const display = Outfit({
@@ -33,15 +33,15 @@ const premium = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://heykalsecurity.com"),
+  metadataBase: new URL("https://haikalsecurity.com"),
   title: {
-    default: `${heykal.wordmark} — ${heykal.tagline}`,
-    template: `%s · ${heykal.wordmark}`,
+    default: `${haikal.wordmark} — ${haikal.tagline}`,
+    template: `%s · ${haikal.wordmark}`,
   },
-  description: `${heykal.name}: elite physical security, executive protection, events, and CCTV consulting. Licensed, insured, 24/7 command.`,
+  description: `${haikal.name}: elite physical security, executive protection, events, and CCTV consulting. Licensed, insured, 24/7 command.`,
   openGraph: {
-    title: `${heykal.wordmark} — Elite physical security`,
-    description: heykal.tagline,
+    title: `${haikal.wordmark} — Elite physical security`,
+    description: haikal.tagline,
     type: "website",
   },
 };

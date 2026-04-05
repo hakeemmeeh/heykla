@@ -1,31 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  /* ─── Ivory & Onyx — Luxury Editorial ─── */
-  --navy: #1C1C1C;
-  --matte: #F0ECE4;
-  --gold: #B8952F;
-  --gold-dim: #9A7D2A;
-  --silver: #4A4A4A;
-  --olive: #D6CFC0;
-  --olive-muted: #C4BBA8;
-  --khaki: #8B7D3C;
-  --background: #FAFAF5;
-  --foreground: #1A1A1A;
-  --muted: #6B6560;
-  --accent: var(--gold);
-  --accent-hover: #D4AF37;
-  --accent-foreground: #FFFFFF;
-  --surface: #FFFFFF;
-  --surface-elevated: #F5F2EB;
-  --border: #E8E3DA;
-  --ring: var(--gold);
-  --grid: rgba(184, 149, 47, 0.06);
+  /* ─── Haikal Security — Tactical Luxury ─── */
+  --purple: #4A358A; /* Lighter, more digital-forward purple */
+  --rose: #C47A8A;
+  --white: #FFFFFF;
+  --ivory: #F5F0E8;
+  --onyx: #121214; /* Sharper Obsidian */
+  --warm-grey: #E8E4DE;
 
-  /* ─── Obsidian Ember — warm amber/copper accents ─── */
-  --amber: #D4740A;
-  --copper: #E8922D;
-  --ember: #C85A07;
+  /* Base mappings */
+  --background: var(--ivory);
+  --foreground: var(--onyx);
+  --muted: #6B6560;
+  --accent: var(--rose);
+  --accent-hover: #B36A7A;
+  --accent-foreground: var(--white);
+  --surface: var(--white);
+  --surface-elevated: #FFFFFF;
+  --border: rgba(18, 18, 20, 0.08); /* Sophisticated hairline */
+  --ring: var(--purple);
+  --grid: rgba(74, 53, 138, 0.04);
+
+  /* Functional mappings */
+  --nav-bg: rgba(245, 240, 232, 0.9); /* Ivory frosted nav for editorial look */
+  --footer-bg: var(--onyx); /* Obsidian footer for "grounded" feel */
 }
 
 @theme inline {
@@ -39,16 +38,14 @@
   --color-surface-elevated: var(--surface-elevated);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --color-navy: var(--navy);
-  --color-matte: var(--matte);
-  --color-gold: var(--gold);
-  --color-silver: var(--silver);
-  --color-olive: var(--olive);
-  --color-olive-muted: var(--olive-muted);
-  --color-khaki: var(--khaki);
-  --color-amber: var(--amber);
-  --color-copper: var(--copper);
-  --color-ember: var(--ember);
+  
+  --color-purple: var(--purple);
+  --color-rose: var(--rose);
+  --color-white: var(--white);
+  --color-ivory: var(--ivory);
+  --color-onyx: var(--onyx);
+  --color-warm-grey: var(--warm-grey);
+
   --font-sans: var(--font-body), system-ui, sans-serif;
 }
 
@@ -88,16 +85,16 @@ body {
 
 /* Rank chevron strip (decorative) */
 .rank-stripes {
-  width: 3.5rem;
-  height: 3px;
+  width: 4rem;
+  height: 2px;
   background: linear-gradient(
     90deg,
-    var(--olive-muted) 0%,
-    var(--olive-muted) 28%,
-    var(--gold) 28%,
-    var(--gold) 52%,
-    var(--olive) 52%,
-    var(--olive) 100%
+    var(--rose) 0%,
+    var(--rose) 33%,
+    var(--purple) 33%,
+    var(--purple) 66%,
+    var(--rose) 66%,
+    var(--rose) 100%
   );
 }
 
@@ -113,35 +110,35 @@ body {
   background-size: 64px 64px;
 }
 
-/* editorial gold hairline */
-.hairline-gold {
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+/* rose hairline */
+.hairline-rose {
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
   height: 1px;
   opacity: 0.55;
 }
 
-/* ─── Ember gradient utilities ─── */
-.gradient-ember {
-  background: linear-gradient(135deg, var(--amber), var(--copper), var(--gold));
+/* ─── Rose gradient utilities ─── */
+.gradient-rose {
+  background: linear-gradient(135deg, var(--rose), var(--purple));
 }
 
-.gradient-ember-text {
-  background: linear-gradient(135deg, var(--amber), var(--copper), var(--gold));
+.gradient-rose-text {
+  background: linear-gradient(135deg, var(--rose), #D4AF37, var(--rose)); /* A bit of shimmer */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.gradient-ember-text-wide {
-  background: linear-gradient(90deg, var(--amber) 0%, var(--copper) 45%, var(--gold) 100%);
+.gradient-rose-text-wide {
+  background: linear-gradient(90deg, var(--rose) 0%, var(--purple) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* ember hairline */
-.hairline-ember {
-  background: linear-gradient(90deg, transparent, var(--amber), var(--copper), transparent);
+/* purple hairline */
+.hairline-purple {
+  background: linear-gradient(90deg, transparent, var(--purple), transparent);
   height: 1px;
   opacity: 0.55;
 }
@@ -162,16 +159,16 @@ body {
 
 .scan-loop {
   background:
-    conic-gradient(from 0deg, rgba(184, 149, 47, 0.18), transparent 20%, transparent 75%, rgba(214, 207, 192, 0.15)),
-    radial-gradient(circle at center, rgba(214, 207, 192, 0.08), transparent 62%);
+    conic-gradient(from 0deg, rgba(196, 122, 138, 0.18), transparent 20%, transparent 75%, rgba(61, 26, 110, 0.15)),
+    radial-gradient(circle at center, rgba(61, 26, 110, 0.08), transparent 62%);
   animation: scanSweep 8s linear infinite;
 }
 
 .scanlines {
   background-image: repeating-linear-gradient(
     180deg,
-    rgba(184, 149, 47, 0.05) 0px,
-    rgba(184, 149, 47, 0.05) 1px,
+    rgba(61, 26, 110, 0.05) 0px,
+    rgba(61, 26, 110, 0.05) 1px,
     transparent 1px,
     transparent 4px
   );

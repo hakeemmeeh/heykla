@@ -22,7 +22,7 @@ export function AboutHeroReveal({ image }: { image: string }) {
         <Image src={image} alt="" fill priority className="object-cover" sizes="100vw" />
       </motion.div>
       <motion.div
-        className="absolute inset-0 bg-gradient-to-t from-background via-[#1C1C1C]/30 to-[#1C1C1C]/10"
+        className="absolute inset-0 bg-gradient-to-t from-purple via-purple/40 to-transparent"
         initial={{ opacity: 0.6 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

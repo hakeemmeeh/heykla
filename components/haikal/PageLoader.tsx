@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { heykal } from "@/lib/heykal";
+import { haikal } from "@/lib/haikal";
 
 export function PageLoader({ children }: { children: React.ReactNode }) {
   const [done, setDone] = useState(false);
@@ -53,19 +53,19 @@ export function PageLoader({ children }: { children: React.ReactNode }) {
             exit={{ opacity: 0 }}
             transition={{ duration: reduce ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="sr-only">Loading {heykal.name}</span>
-            <p className="font-display text-2xl font-bold tracking-[0.35em] text-gold sm:text-3xl">
-              {heykal.wordmark}
+            <span className="sr-only">Loading {haikal.name}</span>
+            <p className="font-premium text-3xl font-black uppercase tracking-[0.4em] text-white italic sm:text-5xl">
+              {haikal.wordmark}
             </p>
-            <p className="font-tactical mt-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-khaki/90">
+            <p className="font-tactical mt-4 text-[10px] font-bold uppercase tracking-[0.5em] text-rose">
               Securing theater · stand by
             </p>
-            <div className="mt-5 flex gap-2" aria-hidden>
+            <div className="mt-8 flex gap-2" aria-hidden>
               <span className="rank-stripes" />
             </div>
-            <div className="mt-4 h-px w-40 overflow-hidden bg-border sm:w-48">
+            <div className="mt-6 h-[1px] w-48 overflow-hidden bg-white/10 sm:w-64">
               <motion.div
-                className="h-full bg-gold"
+                className="h-full bg-rose"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 style={{ transformOrigin: "left" }}
